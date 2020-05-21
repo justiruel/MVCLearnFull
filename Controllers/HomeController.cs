@@ -20,6 +20,12 @@ namespace MVCLearnFull.Controllers
 
         public IActionResult Index()
         {
+            List<string> data = new List<string>
+            {
+                "data1",
+                "data2"
+            };
+            ViewBag.Message = data;
             return View();
         }
 
