@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    int year = DateTime.Now.Year; //.ToString("yyyy-MM-dd");
+}
+
+@section Year {
+    <b>@year</b>
+}
+
+<div class="text-center">
+    <h2>SignIn</h2>
+    <form id="signInForm" action="/Home/SignIn" method="post">
+        <p>
+            User Name
+            <br />
+            @Html.TextBox("Username", null, new { @class = "custom" })  @*Name, value, html attribut*@
+        </p>
+        <p>
+            Password
+            <br />
+            @Html.TextBox("Password")
+        </p>
+        <input class="btn btn-primary" type="button" value="Save" id="Save" />
+        <br/>
+        <span id="msg" style="color:red;" />
+    </form>
+    @section Scripts{
+        <script type="text/javascript">
+            $('#Save').click(function () {
+                var form = $("#signInForm");
+                var url = form.attr("action");
+                var formData = form.serialize();
+                $.post(url, formData, function (data) {
+                    $("#msg").html(data);
+                });
+            })
+        </script>
+    }
+</div>

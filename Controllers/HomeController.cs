@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using MVCLearn.Models.Dto;
 using MVCLearnFull.Models;
 
 namespace MVCLearnFull.Controllers
@@ -34,10 +35,27 @@ namespace MVCLearnFull.Controllers
             return View();
         }
 
+        public IActionResult SignIn()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public string SignIn(SignIn sg)
+        {
+            if (!String.IsNullOrEmpty(sg.Username) && !String.IsNullOrEmpty(sg.Password))
+                //TODO: Save the data in database  
+                return "welcome " + sg.Username;
+            else
+                return "wrong username/password";
+        }
+
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
     }
 }
