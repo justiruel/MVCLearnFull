@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MVCLearn.Models.Dto;
@@ -13,10 +14,12 @@ namespace MVCLearnFull.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private SessionName _sessionName;
 
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
+            _sessionName = new SessionName();
         }
 
         public IActionResult Index()
@@ -32,6 +35,7 @@ namespace MVCLearnFull.Controllers
 
         public IActionResult Privacy()
         {
+            ViewBag.UserName = HttpContext.Session.GetString(_sessionName.SessionUserName);
             return View();
         }
 
@@ -50,16 +54,25 @@ namespace MVCLearnFull.Controllers
             
             
         }
-
         [HttpPost]
         public string SignIn(SignIn sg)
         {
-            if (!String.IsNullOrEmpty(sg.Username) && !String.IsNullOrEmpty(sg.Password))
+            if (!String.IsNullOrEmpty(sg.Username) && !String.IsNullOrEmpty(sg.Password)) {
+                HttpContext.Session.SetString(_sessionName.SessionUserName, sg.Username);
+
                 //TODO: Save the data in database  
                 return "welcome " + sg.Username;
+            }
             else
                 return "wrong username/password";
         }
+
+        public IActionResult LogOut()
+        {
+            HttpContext.Session.Clear();
+            return Redirect("/Home/Privacy");
+        }
+        
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

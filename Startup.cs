@@ -24,6 +24,16 @@ namespace MVCLearnFull
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            //https://stackoverflow.com/a/56039809
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(10); //session akan expired jika idle/tidak diakases blas selama 10 detik, kalau tidak disetting default 20 menit idle time
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,12 +56,17 @@ namespace MVCLearnFull
 
             app.UseAuthorization();
 
+            app.UseSession(); // put top of app.UseEndpoints and/or app.UseMvc();
+
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            //app.UseMvc();
         }
     }
 }
