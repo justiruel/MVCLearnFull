@@ -35,9 +35,20 @@ namespace MVCLearnFull.Controllers
             return View();
         }
 
-        public IActionResult SignIn()
+        public IActionResult SignIn(int id, int parambebas) //?parambebas=[value] //kalau khusus id jadinya /[value]
         {
-            return View();
+            Console.WriteLine(parambebas); //output-> ASP.NET Core Web Server
+            Console.WriteLine(id);
+            if (id == 2)
+            {
+                return Redirect("/Home/Privacy");
+            }
+            else {
+                return View();
+            }
+
+            
+            
         }
 
         [HttpPost]
