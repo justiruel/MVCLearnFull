@@ -91,6 +91,9 @@ namespace MVCLearnFull.Controllers
 
         public IActionResult FlashDataShow()
         {
+            _logger.LogInformation("Information");
+            _logger.LogWarning("warning"); //https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging/?view=aspnetcore-3.1
+
             return View();
         }
 

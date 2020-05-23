@@ -1,0 +1,5 @@
+2020-05-23T15:36:23.2090831+07:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2020-05-23T15:36:23.2467356+07:00  [INF] Hosting environment: "Development" (c3307c92)
+2020-05-23T15:36:23.2503513+07:00  [INF] Content root path: "D:\PROJECT\LogisFleet\Training\MVCLearnFull" (b5d60022)
+2020-05-23T15:36:39.8576893+07:00 80000044-0000-fd00-b63f-84710c7967bb [INF] Information (eb044493)
+2020-05-23T15:36:39.8838374+07:00 80000044-0000-fd00-b63f-84710c7967bb [WRN] warning (e91f183c)
