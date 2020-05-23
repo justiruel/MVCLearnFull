@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -72,7 +73,20 @@ namespace MVCLearnFull.Controllers
             HttpContext.Session.Clear();
             return Redirect("/Home/Privacy");
         }
-        
+
+
+        public IActionResult FlashData()
+        {
+            TempData["FlashData"] = "<b>Halo ini message dari tempdata kalau di php / code igniter nyebutnya flash data,<br/> " +
+                                    "yaitu data yang hanya muncul sekali saat awal load, <br/>" +
+                                    "untuk membuktikan silakan refresh halaman ini maka message akan hilang;</b>";
+            return Redirect("/Home/FlashDataShow");
+        }
+
+        public IActionResult FlashDataShow()
+        {
+            return View();
+        }
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
