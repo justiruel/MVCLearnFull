@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "Data Table";
+}
+
+@section Scripts{
+    <script type="text/javascript">
+            var oTable = $('#tbl').dataTable({
+                "bServerSide": true,
+                "sAjaxSource": "/Home/DataTablePost",
+                "sServerMethod": "POST",
+                "aoColumns": [
+                    { "mData": "Title" },
+                    { "mData": "ExpirateDate" },
+                    { "mData": "Description" },
+                    { "mData": "PercentageComplete" },
+                    {
+                        "mData": function (o) {
+                            console.log(o)
+                            return "<a href='/Home/Datatable/Edit?Id=" + o.Id + "' class='btn btn-info'><i class='fa fa-pencil'></i></a>";
+                        }
+                    }
+                ],
+            });
+    </script>
+}
+
+<div id="mainContainer">
+    <div class="row">
+        <div class="col-md-6">
+            Data Table List
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table id="tbl">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>ExpirateDate</th>
+                        <th>Description</th>
+                        <th>PercentageComplete</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+            </table>
+        </div>
+    </div>
+</div>  
