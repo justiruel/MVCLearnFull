@@ -28,3 +28,15 @@ app.UseEndpoints(endpoints =>
 
 ## Session
 - https://docs.microsoft.com/en-us/aspnet/core/fundamentals/app-state?view=aspnetcore-3.1
+
+# EF Migration 
+- dotnet tool install --global dotnet-ef --version 3.1.4
+- nuget 
+ -- Microsoft.EntityFrameworkCore.Design
+ -- Pomelo.EntityFrameworkCore.MySql
+- clean solution
+- dotnet ef migrations add Initial --context TodoContext
+- dotnet ef migrations remove //if needed
+- dotnet ef migrations script //if needed
+- dotnet ef database update --context TodoContext
+
