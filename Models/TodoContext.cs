@@ -10,5 +10,22 @@ namespace TodoApi.Models
         }
 
         public DbSet<TodoItem> TodoItems { get; set; }
+        public DbSet<Company> Company { get; set; }
+        public DbSet<Employee> Employees { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            /*modelBuilder.Entity<Company>()
+                .HasMany(c => c.Employees)
+                .WithOne(e => e.Company)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);  //jika menghapus record yang di table company sedangkan id company masih dipakakai di table employee maka semua record di table employee yang memakai id company tersebut akan ikut terhapus
+            */
+            modelBuilder.Entity<Company>()
+                .HasMany(c => c.Employees)
+                .WithOne(e => e.Company)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);  //jika menghapus record yang di table company sedangkan id company masih dipakakai di table employee maka akan muncul pesan error, dan penghapusan gagal
+        }
     }
 }

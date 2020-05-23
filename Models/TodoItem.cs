@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace TodoApi.Models
@@ -31,11 +32,6 @@ namespace TodoApi.Models
         public string Description { get; set; }
         public int PercentageComplete { get; set; }
     }
-
-    public class ReturnData
-        {
-            public string Success { get; set; }
-        }
 }
 
 
