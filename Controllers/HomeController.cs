@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
@@ -8,6 +10,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using MVCLearn.Models.Dto;
 using MVCLearnFull.Models;
@@ -21,12 +24,14 @@ namespace MVCLearnFull.Controllers
         private readonly ILogger<HomeController> _logger;
         private SessionName _sessionName;
         private readonly TodoContext _context;
+        private IConfiguration _appSettings;
 
-        public HomeController(ILogger<HomeController> logger, TodoContext context)
+        public HomeController(ILogger<HomeController> logger, TodoContext context, IConfiguration configuration)
         {
             _logger = logger;
             _sessionName = new SessionName();
             _context = context;
+            _appSettings = configuration;
         }
 
         public IActionResult Index()
@@ -93,6 +98,17 @@ namespace MVCLearnFull.Controllers
         {
             _logger.LogInformation("Information");
             _logger.LogWarning("warning"); //https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging/?view=aspnetcore-3.1
+
+            try
+            {
+                Console.WriteLine("ChildData {0}", _appSettings.GetValue<string>("ChildData"));
+                Console.WriteLine("ChildData2 {0}", _appSettings["ParentData:ChildData2"]);
+
+            }
+            catch (ConfigurationErrorsException)
+            {
+                Console.WriteLine("Error reading app settings");
+            }
 
             return View();
         }
