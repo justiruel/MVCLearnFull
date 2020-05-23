@@ -16,3 +16,6 @@ app.UseEndpoints(endpoints =>
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 ```
+
+## Session
+- https://docs.microsoft.com/en-us/aspnet/core/fundamentals/app-state?view=aspnetcore-3.1
