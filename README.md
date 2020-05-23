@@ -34,9 +34,12 @@ app.UseEndpoints(endpoints =>
 - nuget 
  -- Microsoft.EntityFrameworkCore.Design
  -- Pomelo.EntityFrameworkCore.MySql
-- clean solution
-- dotnet ef migrations add Initial --context TodoContext
-- dotnet ef migrations remove //if needed
-- dotnet ef migrations script //if needed
-- dotnet ef database update --context TodoContext
 
+- setiap selesai membuat table baru (codefirst model), foreginkey, atau seed maka kerjakan perintah berikut
+```
+dotnet ef migrations add Initial --context TodoContext
+dotnet ef migrations remove //if needed
+dotnet ef migrations script //if needed
+dotnet ef database update --context TodoContext
+setiap menjalankan perintah tapi tidak berefek pastikan "clean solution" dulu !
+```

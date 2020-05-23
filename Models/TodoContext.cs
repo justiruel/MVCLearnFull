@@ -26,6 +26,14 @@ namespace TodoApi.Models
                 .WithOne(e => e.Company)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);  //jika menghapus record yang di table company sedangkan id company masih dipakakai di table employee maka akan muncul pesan error, dan penghapusan gagal
+
+
+            //DATA SEEDING
+            modelBuilder.Entity<Company>().HasData(
+                new Company() { Id=1, Name = "Test 1" },
+                new Company() { Id = 2, Name = "Test 2" },
+                new Company() { Id = 3, Name = "Test 3" }
+            );
         }
     }
 }
